@@ -1,0 +1,26 @@
+const int inputPin = 2;  // The analog input pin connected to the output of the bridge rectifier
+const int numSamples = 350;  // Number of samples to take for frequency calculation
+
+void setup() {
+  Serial.begin(115200);  // Initialize the serial communication
+}
+
+void loop() {
+  unsigned long duration = 0;
+  unsigned long startTime = micros();
+
+  for (int i = 0; i < numSamples; i++) {
+    duration = pulseIn(inputPin, HIGH);  // Measure the time duration of each cycle
+    
+  }
+
+  unsigned long endTime = micros();
+  
+  float frequency = 1000000.0 / (((endTime - startTime) / numSamples) );  // Calculate the approximate frequency (in Hz)
+
+  Serial.print("Approximate Frequency: ");
+  Serial.print(frequency,3);
+  Serial.println(" Hz");
+
+  //delay(1000);  // Wait for 1 second before taking the next measurement
+}
